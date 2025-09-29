@@ -1,0 +1,104 @@
+---
+import Layout from '../layouts/layout.astro';
+import logo from '../assets/nextround-logo.png'; 
+const title = "NextRound — Interview Prep That Talks Back";
+const description = "Join the NextRound waitlist to practice real interview questions with conversational AI. Get instant feedback and be ready for every round.";
+---
+
+<!-- Logo + availability badge -->
+<div class="mx-auto max-w-2xl px-6 pt-16 text-center">
+  <!-- Logo tile -->
+  <div class="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl 
+            bg-gradient-to-br from-blue-100 to-blue-400 shadow-sm">
+  <img src={logo.src} alt="NextRound logo" class="h-7 w-7 text-blue-900" />
+</div>
+
+  <!-- Availability pill -->
+
+    <div class="mx-auto mt-4 inline-flex items-center gap-2 rounded-full border 
+                border-blue-200 bg-white/90 px-3 py-1 text-xs font-medium 
+                tracking-wide text-gray-700 shadow-sm backdrop-blur">
+    <span class="inline-block h-2 w-2 rounded-full bg-violet-400 animate-pulse"></span>
+    <span>AVAILABLE IN EARLY 2026</span>
+    </div>
+
+</div>
+
+
+<Layout {title} {description}>
+  <!-- Hero -->
+  <section class="mx-auto max-w-2xl px-6 pt-20 pb-16 text-center">
+    <h1 class="text-4xl md:text-5xl font-semibold tracking-tight">
+      Get Ready for Your <span class="whitespace-nowrap">NextRound.</span>
+    </h1>
+    <p class="mt-4 text-lg text-gray-600">
+      Interview prep that talks back. Practice real questions, get instant feedback, and walk into every round with confidence.
+      Sign up to be notified when we launch!
+    </p>
+
+    <!-- Waitlist form -->
+    <form action="https://formspree.io/f/your-id" method="POST"
+          class="mt-8 flex gap-3 rounded-xl border border-gray-200 p-2 bg-white">
+      
+      <input name="email" type="email" required placeholder="you@email.com"
+             class="flex-1 rounded-lg px-4 py-3 bg-gray-100 border border-gray-300 text-gray-800 placeholder-gray-500"/>
+
+
+      <button class="rounded-lg px-6 py-3 text-white 
+               bg-blue-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-400 
+               transition-all duration-200">
+        Join Waitlist
+      </button>
+
+
+
+
+    </form>
+
+    <p class="mt-3 text-sm text-gray-500">
+      No spam. Just an invite when we launch.
+    </p>
+
+    <p class="mt-4 text-sm text-gray-600">
+    Join <span class="font-semibold">12,500+</span> others on the waitlist
+    </p>
+
+
+
+  </section>
+
+<section class="mx-auto max-w-3xl px-6 pb-20">
+  <h2 class="text-2xl font-semibold text-center mb-6">Frequently Asked Questions</h2>
+  <div class="space-y-4">
+    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm">
+      <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900">
+        What is NextRound?
+        <span class="transition group-open:rotate-45 text-gray-400">+</span>
+      </summary>
+      <p class="mt-2 text-gray-600">
+        NextRound is conversational interview practice that talks back, enjoy a realistic Q&A with instant
+        feedback to help you build confidence for every round.
+      </p>
+    </details>
+
+    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm">
+      <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900">
+        When will it be available?
+        <span class="transition group-open:rotate-45 text-gray-400">+</span>
+      </summary>
+      <p class="mt-2 text-gray-600">
+        We're opening early access in 2025. Join the waitlist to be notified first.
+      </p>
+    </details>
+
+    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm">
+      <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900">
+        Is there a free plan?
+        <span class="transition group-open:rotate-45 text-gray-400">+</span>
+      </summary>
+      <p class="mt-2 text-gray-600">
+        Yes. You can start free and upgrade anytime for more advanced features.
+      </p>
+    </details>
+  </div>
+</section>

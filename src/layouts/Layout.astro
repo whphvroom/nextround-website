@@ -1,22 +1,50 @@
+---
+import '../styles/global.css';
+
+// Allow pages to override <title> and <meta name="description">
+const {
+  title = 'NextRound — AI-powered interview prep',
+  description = 'Practice real interview questions, get instant feedback, and track progress so you walk into every round with confidence.',
+  canonical, // optional per-page canonical URL
+} = Astro.props;
+---
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Canonical (optional, pass from page via { canonical }) -->
+    {canonical && <link rel="canonical" href={canonical} />}
+
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/og-image.png" />
+    <meta property="og:url" content={canonical ?? ''} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="/og-image.png" />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
+  </head>
+
+  <body class="min-h-screen bg-white text-gray-900 antialiased">
+    <main>
+      <slot />
+    </main>
+  </body>
 </html>
 
 <style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+  /* Keep the reset you had */
+  html, body { margin: 0; width: 100%; height: 100%; }
 </style>
