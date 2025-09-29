@@ -27,12 +27,12 @@ const description = "Join the NextRound waitlist to practice real interview ques
 
 <Layout {title} {description}>
   <!-- Hero -->
-  <section class="mx-auto max-w-2xl px-6 pt-20 pb-16 text-center">
+  <section class="mx-auto max-w-2xl px-6 pt-8 pb-16 text-center">
     <h1 class="text-4xl md:text-5xl font-semibold tracking-tight">
       Get Ready for Your <span class="whitespace-nowrap">NextRound.</span>
     </h1>
     <p class="mt-4 text-lg text-gray-600">
-      Interview prep that talks back. Practice real questions, get instant feedback, and walk into every round with confidence.
+      Interview prep that talks back.
       Sign up to be notified when we launch!
     </p>
 
@@ -67,38 +67,96 @@ const description = "Join the NextRound waitlist to practice real interview ques
 
   </section>
 
+
+  <!-- Video Demo Section -->
+<section class="mx-auto max-w-4xl px-6 pb-20">
+  <div class="relative overflow-hidden rounded-2xl shadow-lg bg-gray-100">
+    <!-- Fake browser frame dots -->
+    <div class="flex gap-2 p-3">
+      <span class="h-3 w-3 rounded-full bg-gray-300"></span>
+      <span class="h-3 w-3 rounded-full bg-gray-300"></span>
+      <span class="h-3 w-3 rounded-full bg-gray-300"></span>
+    </div>
+
+
+
+    <!-- Video thumbnail (replace with real video later) -->
+    <div class="relative">
+      <img
+        src="/your-thumbnail.jpg"
+        alt="Product demo"
+        class="w-full object-cover"
+      />
+      <!-- Play button overlay -->
+      <button
+        class="absolute inset-0 flex flex-col items-center justify-center text-center"
+      >
+        <span
+          class="flex h-16 w-16 items-center justify-center rounded-full bg-violet-400 shadow-lg text-white text-2xl transition hover:scale-105"
+        >
+          ▶
+        </span>
+        <span class="mt-2 text-sm text-gray-600">
+          See how NextRound works (3m)
+        </span>
+      </button>
+    </div>
+  </div>
+</section>
+
+
+
 <section class="mx-auto max-w-3xl px-6 pb-20">
   <h2 class="text-2xl font-semibold text-center mb-6">Frequently Asked Questions</h2>
+
   <div class="space-y-4">
-    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm">
-      <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900">
-        What is NextRound?
-        <span class="transition group-open:rotate-45 text-gray-400">+</span>
+    <!-- Item 1 -->
+    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
+      <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
+        <span>What is NextRound?</span>
+        <span class="transition-transform duration-500 ease-in-out group-open:rotate-45 text-gray-400">+</span>
       </summary>
-      <p class="mt-2 text-gray-600">
-        NextRound is conversational interview practice that talks back, enjoy a realistic Q&A with instant
-        feedback to help you build confidence for every round.
-      </p>
+
+      <!-- Auto-height animation container -->
+      <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
+        <div class="overflow-hidden">
+          <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
+            NextRound is conversational interview practice that talks back, enjoy realistic Q&A with instant feedback to help you build confidence for every round.
+          </p>
+        </div>
+      </div>
     </details>
 
-    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm">
-      <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900">
-        When will it be available?
-        <span class="transition group-open:rotate-45 text-gray-400">+</span>
+    <!-- Item 2 -->
+    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
+      <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
+        <span>When will it be available?</span>
+        <span class="transition-transform duration-500 ease-in-out group-open:rotate-45 text-gray-400">+</span>
       </summary>
-      <p class="mt-2 text-gray-600">
-        We're opening early access in 2025. Join the waitlist to be notified first.
-      </p>
+
+      <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
+        <div class="overflow-hidden">
+          <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
+            Early access begins in 2026. Join the waitlist to get notified first.
+          </p>
+        </div>
+      </div>
     </details>
 
-    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm">
-      <summary class="flex justify-between items-center cursor-pointer font-semibold text-gray-900">
-        Is there a free plan?
-        <span class="transition group-open:rotate-45 text-gray-400">+</span>
+    <!-- Item 3 -->
+    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
+      <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
+        <span>Is there a free plan?</span>
+        <span class="transition-transform duration-500 ease-in-out group-open:rotate-45 text-gray-400">+</span>
       </summary>
-      <p class="mt-2 text-gray-600">
-        Yes. You can start free and upgrade anytime for more advanced features.
-      </p>
+
+      <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
+        <div class="overflow-hidden">
+          <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
+            Yes. Start free and upgrade anytime for advanced features.
+          </p>
+        </div>
+      </div>
     </details>
   </div>
 </section>
