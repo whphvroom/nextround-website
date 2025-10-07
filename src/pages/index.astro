@@ -78,7 +78,7 @@ const description = "A study workspace that makes sense";
 
 <script>
   const form = document.getElementById('early-access-form');
-  form.addEventListener('submit', async (e) => {
+  form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const data = new FormData(form);
@@ -87,21 +87,32 @@ const description = "A study workspace that makes sense";
       email: data.get('email')
     };
 
-    try {
-      const res = await fetch(
-        'https://script.google.com/macros/s/AKfycbxi4nexjF5ilEjjc2ZOeKwQmhRznRNlBhjH1S0bKdJTvahOGo_2qTq-QhojqnvPLZAT/exec',
-        {
+    // quick UI feedback
+    const btn = form.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+
+    const url = 'https://script.google.com/macros/s/AKfycbxi4nexjF5ilEjjc2ZOeKwQmhRznRNlBhjH1S0bKdJTvahOGo_2qTq-QhojqnvPLZAT/exec';
+
+    let sent = false;
+    if (navigator.sendBeacon) {
+      const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+      sent = navigator.sendBeacon(url, blob);
+    }
+
+    if (!sent) {
+      try {
+        fetch(url, {
           method: 'POST',
           mode: 'no-cors',
+          keepalive: true,
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)
-        }
-      );
-
-      window.location.href = '/thanks';
-    } catch (err) {
-      console.error('Submission error:', err);
-      alert('Something went wrong. Please try again.');
+        });
+      } catch (_) {}
     }
+
+    window.location.assign('/thanks');
   });
 </script>
 
