@@ -48,16 +48,33 @@ const description = "A study workspace that makes sense";
 
 
 
-<form id="early-access-form" class="mt-8 flex gap-3 rounded-xl border border-gray-200 p-2 bg-white">
-  <input name="name" type="text" placeholder="Your name"
-         class="flex-1 rounded-lg px-4 py-3 bg-gray-100 border border-gray-300 text-gray-800 placeholder-gray-500" required />
-  <input name="email" type="email" placeholder="you@email.com"
-         class="flex-1 rounded-lg px-4 py-3 bg-gray-100 border border-gray-300 text-gray-800 placeholder-gray-500" required />
-  <button type="submit"
-          class="rounded-lg px-6 py-3 text-white bg-blue-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-400 transition-all duration-200">
+<form
+  id="early-access-form"
+  class="mt-8 rounded-xl border border-gray-200 p-2 bg-white
+         flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3"
+>
+  <input
+    name="name"
+    type="text"
+    placeholder="Your name"
+    class="w-full sm:flex-1 min-w-0 rounded-lg px-4 py-3 bg-gray-100 border border-gray-300 text-gray-800 placeholder-gray-500"
+    required
+  />
+  <input
+    name="email"
+    type="email"
+    placeholder="you@email.com"
+    class="w-full sm:flex-1 min-w-0 rounded-lg px-4 py-3 bg-gray-100 border border-gray-300 text-gray-800 placeholder-gray-500"
+    required
+  />
+  <button
+    type="submit"
+    class="w-full sm:w-auto rounded-lg px-6 py-3 text-white bg-blue-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-400 transition-all duration-200"
+  >
     Join Waiting List
   </button>
 </form>
+
 
 <script>
   const form = document.getElementById('early-access-form');
