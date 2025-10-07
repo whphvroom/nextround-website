@@ -53,6 +53,15 @@ const description = "A study workspace that makes sense";
   class="mt-8 rounded-xl border border-gray-200 p-2 bg-white
          flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3"
 >
+
+    <!-- Honeypot (bots often fill this) -->
+    <input type="text" name="website" autocomplete="off" tabindex="-1" class="hidden" />
+
+    <!-- Timestamp at page load (ms since epoch) -->
+    <input type="hidden" name="ts" value="" />
+
+
+
   <input
     name="name"
     type="text"
@@ -78,28 +87,54 @@ const description = "A study workspace that makes sense";
 
 <script>
   const form = document.getElementById('early-access-form');
+
+  // Inject honeypot + timestamp on load (invisible to real users)
+  document.addEventListener('DOMContentLoaded', () => {
+    // Honeypot
+    if (!form.querySelector('input[name="website"]')) {
+      const hp = document.createElement('input');
+      hp.type = 'text';
+      hp.name = 'website';
+      hp.autocomplete = 'off';
+      hp.tabIndex = -1;
+      hp.setAttribute('aria-hidden', 'true');
+      hp.style.display = 'none';
+      form.appendChild(hp);
+    }
+    // Timestamp
+    let ts = form.querySelector('input[name="ts"]');
+    if (!ts) {
+      ts = document.createElement('input');
+      ts.type = 'hidden';
+      ts.name = 'ts';
+      form.appendChild(ts);
+    }
+    ts.value = String(Date.now());
+  });
+
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-
-    const data = new FormData(form);
-    const name  = data.get('name')?.toString().trim() || '';
-    const email = data.get('email')?.toString().trim() || '';
-    const url   = 'https://script.google.com/macros/s/AKfycbw9vSaePugjAhgEat774LXjLlYzpYyP6H1D2IGvbGtC1oLWkzwvC_kVJ30jENDWQzI8/exec';
 
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Joining...';
+    btn.setAttribute('aria-busy', 'true');
 
-    const bodyUrlEncoded = new URLSearchParams({ name, email }).toString();
+    const url = 'https://script.google.com/macros/s/AKfycbydjX8SllcgQI6J4hQJmaMRqB95RRTSx0j2WmXZDgvv2EH-CXddE3T3WR5VEXnevTc7/exec';
 
+    // Include ALL fields (name, email, + hidden website/ts)
+    const body = new URLSearchParams([...new FormData(form).entries()]).toString();
+
+    // Try sendBeacon first (survives navigation)
     let sent = false;
     if (navigator.sendBeacon) {
-      const blob = new Blob([bodyUrlEncoded], {
-        type: 'application/x-www-form-urlencoded;charset=UTF-8'
-      });
-      sent = navigator.sendBeacon(url, blob);
+      try {
+        const blob = new Blob([body], { type: 'application/x-www-form-urlencoded;charset=UTF-8' });
+        sent = navigator.sendBeacon(url, blob);
+      } catch (_) {}
     }
 
+    // Fallback to keepalive fetch (fire-and-forget)
     if (!sent) {
       try {
         fetch(url, {
@@ -107,12 +142,12 @@ const description = "A study workspace that makes sense";
           mode: 'no-cors',
           keepalive: true,
           headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
-          body: bodyUrlEncoded
+          body
         });
       } catch (_) {}
     }
 
-
+    // Instant redirect for snappy UX
     window.location.assign('/thanks');
   });
 </script>
