@@ -2,7 +2,7 @@
 import Layout from '../layouts/layout.astro';
 import logo from '../assets/threewords.png'; 
 const title = "ThreeWords - Turn Lectures into Learning";
-const description = "ThreeWords helps students make sense of information faster and retain it longer. Upload your lecture slides or videos, and it organizes the key ideas into study guides, questions, and flashcards.";
+const description = "A study workspace that makes sense";
 ---
 
 <!-- Logo + availability badge -->
@@ -22,7 +22,7 @@ const description = "ThreeWords helps students make sense of information faster 
               border-gray-200 bg-white/80 px-3 py-1 text-xs font-medium 
               tracking-wide text-gray-700 shadow-sm backdrop-blur">
     <span class="inline-block h-2 w-2 rounded-full bg-blue-400 animate-pulse"></span>
-    <span>PRIVATE BETA - INVITES ROLLING OUT</span>
+    <span>AVAILABLE IN FALL 2025</span>
   </div>
 </div>
 
@@ -31,32 +31,65 @@ const description = "ThreeWords helps students make sense of information faster 
 <Layout {title} {description}>
   <!-- Hero -->
   <section class="mx-auto max-w-2xl px-6 pt-8 pb-16 text-center">
+  
     <h1 class="text-4xl md:text-5xl font-semibold tracking-tight">
       Turn lectures into <span class="whitespace-nowrap">understanding.</span>
     </h1>
+
+    <div class="h-6"></div>
+
+
     <p class="mt-4 text-lg text-gray-600">
 
-      ThreeWords helps you make sense of information faster and retain it longer.  
+    ThreeWords helps you make sense of information faster, retain it longer, and recall it better.  
     Upload your lecture slides or videos - it summarizes, organizes, and builds study materials you can actually use.
       
     </p>
 
-    <!-- Waitlist form -->
-    <form action="https://formspree.io/f/your-id" method="POST"
-          class="mt-8 flex gap-3 rounded-xl border border-gray-200 p-2 bg-white">
-      
-      <input name="email" type="email" required placeholder="you@email.com"
-             class="flex-1 rounded-lg px-4 py-3 bg-gray-100 border border-gray-300 text-gray-800 placeholder-gray-500"/>
 
 
-      <button class="rounded-lg px-6 py-3 text-white 
-               bg-blue-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-400 
-               transition-all duration-200">
-        Join Early Access
-      </button>
+<form id="early-access-form" class="mt-8 flex gap-3 rounded-xl border border-gray-200 p-2 bg-white">
+  <input name="name" type="text" placeholder="Your name"
+         class="flex-1 rounded-lg px-4 py-3 bg-gray-100 border border-gray-300 text-gray-800 placeholder-gray-500" required />
+  <input name="email" type="email" placeholder="you@email.com"
+         class="flex-1 rounded-lg px-4 py-3 bg-gray-100 border border-gray-300 text-gray-800 placeholder-gray-500" required />
+  <button type="submit"
+          class="rounded-lg px-6 py-3 text-white bg-blue-500 hover:bg-gradient-to-r hover:from-blue-500 hover:to-blue-400 transition-all duration-200">
+    Join Early Access
+  </button>
+</form>
+
+<script>
+  const form = document.getElementById('early-access-form');
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const data = new FormData(form);
+    const payload = {
+      name: data.get('name'),
+      email: data.get('email')
+    };
+
+    try {
+      const res = await fetch(
+        'https://script.google.com/macros/s/AKfycbxi4nexjF5ilEjjc2ZOeKwQmhRznRNlBhjH1S0bKdJTvahOGo_2qTq-QhojqnvPLZAT/exec',
+        {
+          method: 'POST',
+          mode: 'no-cors',
+          body: JSON.stringify(payload)
+        }
+      );
+
+      window.location.href = '/thanks';
+    } catch (err) {
+      console.error('Submission error:', err);
+      alert('Something went wrong. Please try again.');
+    }
+  });
+</script>
 
 
-    </form>
+
 
     <p class="mt-3 text-sm text-gray-500">
       Beta launching soon - be among the first to try it 
@@ -88,6 +121,26 @@ const description = "ThreeWords helps students make sense of information faster 
       </div>
     </details>
 
+    <!-- Item: Why join early access -->
+<details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
+  <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
+    <span>Why join early access?</span>
+    <span class="transition-transform duration-500 ease-in-out group-open:rotate-45 text-gray-400">+</span>
+  </summary>
+
+  <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
+    <div class="overflow-hidden">
+      <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
+        Joining early access means you'll be the first to know when ThreeWords launches.
+        You'll get updates, early previews, and an invite to try it before everyone else.
+        It's not the same as being a beta tester - early access just keeps you in the loop. 
+        If you'd like to be a beta tester, you can let us know when we reach out in a later email. 
+      </p>
+    </div>
+  </div>
+</details>
+
+
     <!-- Item 2 -->
     <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
       <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
@@ -98,13 +151,38 @@ const description = "ThreeWords helps students make sense of information faster 
       <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
         <div class="overflow-hidden">
           <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
-            The early beta will begin in a few weeks. Sign up for early access to be among the first to try it when invites roll out.
+            Early access opens in a few weeks for students who sign up.
+
+            Beta testing will follow shortly after, with public launch planned once feedback is incorporated.
+
+            Joining early access ensures you'll be the first to know when each phase goes live.
+
           </p>
         </div>
       </div>
     </details>
 
-    <!-- Item 3 -->
+    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
+      <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
+        <span>How do I become a beta tester?</span>
+        <span class="transition-transform duration-500 ease-in-out group-open:rotate-45 text-gray-400">+</span>
+      </summary>
+
+      <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
+        <div class="overflow-hidden">
+          <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
+            
+        After you join early access, you'll get an email inviting you to confirm if you'd like to be a beta tester.
+        We'll choose a limited number of people from those who express interest to help test new features
+        and share feedback before launch.
+
+
+          </p>
+        </div>
+      </div>
+    </details>
+
+
     <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
       <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
         <span>Who is it for?</span>
@@ -114,15 +192,14 @@ const description = "ThreeWords helps students make sense of information faster 
       <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
         <div class="overflow-hidden">
           <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
-            ThreeWords is built for students who deal with complex, information-dense material - 
-            starting with health sciences like pre-med, nursing, and pharmacy. 
-            It's designed to make studying more structured and less overwhelming.
+            ThreeWords is built for anyone who studies dense, complex material - from health sciences and engineering to business and the humanities. 
+            It helps turn long lectures and notes into organized, easy-to-review study materials.
           </p>
         </div>
       </div>
     </details>
 
-    <!-- Item 4 -->
+
     <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
       <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
         <span>Will there be a free plan?</span>
@@ -139,25 +216,8 @@ const description = "ThreeWords helps students make sense of information faster 
       </div>
     </details>
 
-    <!-- Item 5 -->
-    <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
-      <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
-        <span>Can I become a beta tester?</span>
-        <span class="transition-transform duration-500 ease-in-out group-open:rotate-45 text-gray-400">+</span>
-      </summary>
+  
 
-      <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
-        <div class="overflow-hidden">
-          <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
-            Yes. We're currently inviting a limited number of early testers to help shape ThreeWords. 
-            Join early access to receive an invite once your program is eligible.
-          </p>
-        </div>
-      </div>
-    </details>
-
-
-    <!-- Item 6 -->
     <details class="group rounded-xl bg-gray-50 p-5 shadow-sm ring-1 ring-gray-200">
   <summary class="flex cursor-pointer select-none items-center justify-between font-semibold text-gray-900">
     <span>Why is it called ThreeWords?</span>
@@ -167,8 +227,8 @@ const description = "ThreeWords helps students make sense of information faster 
   <div class="grid grid-rows-[0fr] transition-all duration-500 ease-in-out group-open:grid-rows-[1fr]">
     <div class="overflow-hidden">
       <p class="mt-3 text-gray-600 transition-opacity duration-500 ease-in-out opacity-0 group-open:opacity-100">
-        The name comes from the three words every student says at least once before an exam - usually something like, "what the ---". 
-ThreeWords is built to help you avoid saying that phrase = or at least say it a little less often.
+        The name comes from the three words every student says at least once the night before an exam - usually something like, "what the ---". 
+ThreeWords is built to help you avoid saying that phrase or at least say it a little less often.
       </p>
     </div>
   </div>
@@ -195,26 +255,29 @@ ThreeWords is built to help you avoid saying that phrase = or at least say it a 
 
     <!-- Nav -->
     <nav class="mt-8 grid grid-cols-2 gap-6 text-sm text-gray-700 md:mt-0 md:grid-cols-3">
+
+
       <ul class="space-y-2">
-        <li><a href="/#features" class="hover:text-gray-900">Features</a></li>
-        <li><a href="/#faq" class="hover:text-gray-900">FAQ</a></li>
-        <li><a href="/#early-access" class="hover:text-gray-900">Early Access</a></li>
-      </ul>
-      <ul class="space-y-2">
-        <li><a href="/privacy" class="hover:text-gray-900">Privacy</a></li>
-        <li><a href="/terms" class="hover:text-gray-900">Terms</a></li>
         <li><a href="mailto:hello@threewords.app" class="hover:text-gray-900">Contact</a></li>
       </ul>
+
       <ul class="space-y-2">
-        <li><a href="https://status.threewords.app" class="hover:text-gray-900">Status</a></li>
-        <li><a href="https://x.com/threewordsapp" class="hover:text-gray-900">X / Twitter</a></li>
-        <li><a href="https://www.instagram.com/threewordsapp" class="hover:text-gray-900">Instagram</a></li>
+        <li><a href="/privacy" class="hover:text-gray-900">Privacy</a></li>
       </ul>
+
+    
+    <ul class="space-y-2">
+        <li><a href="/terms" class="hover:text-gray-900">Terms</a></li>
+      </ul>
+
+
     </nav>
   </div>
 
-  <div class="mx-auto max-w-5xl px-6 pb-8 text-xs text-gray-500 md:flex md:items-center md:justify-between">
-    <p>© {new Date().getFullYear()} Common Era Inc. All rights reserved.</p>
-    <p class="mt-2 md:mt-0">Beta launching soon - be among the first to try it.</p>
-  </div>
+
+<div class="mx-auto max-w-5xl px-6 pb-8 text-xs text-gray-500 md:flex md:items-center md:justify-between">
+  <p> @{new Date().getFullYear()} Studio 844 Inc.</p>
+  <p class="mt-2 md:mt-0">Beta launching soon - be among the first to try it.</p>
+</div>
 </footer>
+

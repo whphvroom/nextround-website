@@ -3,8 +3,8 @@ import '../styles/global.css';
 
 // Allow pages to override <title> and <meta name="description">
 const {
-  title = 'NextRound — AI-powered interview prep',
-  description = 'Practice real interview questions, get instant feedback, and track progress so you walk into every round with confidence.',
+  title = '',
+  description = '',
   canonical, // optional per-page canonical URL
 } = Astro.props;
 ---
@@ -33,8 +33,10 @@ const {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content="/og-image.png" />
 
-    <link rel="icon" href="/favicon.ico" sizes="any" />
-    <link rel="icon" type="image/svg+xml" href="/threewords.png" />
+    
+    <link rel="icon" type="image/png" href="/threewords.png?v=2" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/threewords.png?v=2" />
+
   </head>
 
   <body class="min-h-screen bg-white text-gray-900 antialiased">
