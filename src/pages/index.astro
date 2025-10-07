@@ -82,21 +82,21 @@ const description = "A study workspace that makes sense";
     e.preventDefault();
 
     const data = new FormData(form);
-    const payload = {
-      name: data.get('name'),
-      email: data.get('email')
-    };
+    const name  = data.get('name')?.toString().trim() || '';
+    const email = data.get('email')?.toString().trim() || '';
+    const url   = 'https://script.google.com/macros/s/AKfycbw9vSaePugjAhgEat774LXjLlYzpYyP6H1D2IGvbGtC1oLWkzwvC_kVJ30jENDWQzI8/exec';
 
-    // quick UI feedback
     const btn = form.querySelector('button[type="submit"]');
     btn.disabled = true;
     btn.textContent = 'Joining...';
 
-    const url = 'https://script.google.com/macros/s/AKfycbxi4nexjF5ilEjjc2ZOeKwQmhRznRNlBhjH1S0bKdJTvahOGo_2qTq-QhojqnvPLZAT/exec';
+    const bodyUrlEncoded = new URLSearchParams({ name, email }).toString();
 
     let sent = false;
     if (navigator.sendBeacon) {
-      const blob = new Blob([JSON.stringify(payload)], { type: 'application/json' });
+      const blob = new Blob([bodyUrlEncoded], {
+        type: 'application/x-www-form-urlencoded;charset=UTF-8'
+      });
       sent = navigator.sendBeacon(url, blob);
     }
 
@@ -106,15 +106,17 @@ const description = "A study workspace that makes sense";
           method: 'POST',
           mode: 'no-cors',
           keepalive: true,
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8' },
+          body: bodyUrlEncoded
         });
       } catch (_) {}
     }
 
+
     window.location.assign('/thanks');
   });
 </script>
+
 
 
 
